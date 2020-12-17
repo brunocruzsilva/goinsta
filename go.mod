@@ -1,3 +1,3 @@
-module github.com/TheForgotten69/goinsta/v2
+module github.com/brunocruzsilva/goinsta
 
 go 1.15
