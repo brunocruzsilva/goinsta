@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ahmdrz/goinsta"
-	"github.com/ahmdrz/goinsta/utilities"
+	"github.com/brunocruzsilva/goinsta"
+	"github.com/brunocruzsilva/goinsta/utilities"
 )
 
 func main() {
