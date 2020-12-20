@@ -15,8 +15,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/ahmdrz/goinsta/v2"
-	"github.com/ahmdrz/goinsta/v2/utilities"
+	"github.com/brunocruzsilva/goinsta"
+	"github.com/brunocruzsilva/goinsta/utilities"
 )
 
 func main() {

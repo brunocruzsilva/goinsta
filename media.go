@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"net/http"
 	neturl "net/url"
@@ -1014,6 +1015,7 @@ func (insta *Instagram) postPhoto(photo io.Reader, photoCaption string, quality 
 	bs := buf.Bytes()
 	req, err := http.NewRequest("POST", goInstaBaseUrl+"rupload_igphoto/"+name, buf)
 	if err != nil {
+		log.Println("teste3", err)
 		return nil, err
 	}
 	req.Header.Set("X-IG-Capabilities", "3Q4=")
@@ -1029,10 +1031,11 @@ func (insta *Instagram) postPhoto(photo io.Reader, photoCaption string, quality 
 		"media_type":        "1",
 		"upload_id":         strconv.FormatInt(uploadID, 10),
 		"xsharing_user_ids": "[]",
-		"image_compression": `{"lib_name": "moz", "lib_version": "3.1.m", "quality": "80"}`,
+		"image_compression": `{"lib_name": "moz", "lib_version": "3.1.m", "quality": "100"}`,
 	}
 	params, err := json.Marshal(ruploadParams)
 	if err != nil {
+		log.Println("teste4", err)
 		return nil, err
 	}
 	req.Header.Set("X-Instagram-Rupload-Params", string(params))
@@ -1041,14 +1044,17 @@ func (insta *Instagram) postPhoto(photo io.Reader, photoCaption string, quality 
 
 	resp, err := insta.c.Do(req)
 	if err != nil {
+		log.Println("teste5", err)
 		return nil, err
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		log.Println("teste6", err)
 		return nil, err
 	}
 	if resp.StatusCode != 200 {
+		log.Println("teste7", resp)
 		return nil, fmt.Errorf("invalid status code, result: %s with body %s", resp.Status, string(body))
 	}
 	var result struct {
@@ -1106,6 +1112,7 @@ func (insta *Instagram) UploadAlbum(photos []io.Reader, photoCaption string, qua
 	for _, photo := range photos {
 		config, err := insta.postPhoto(photo, photoCaption, quality, filterType, true)
 		if err != nil {
+			log.Println("teste2", err)
 			return out, err
 		}
 
